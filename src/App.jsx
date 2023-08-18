@@ -1,9 +1,10 @@
+import Navbar from "./components/Navbar";
 import Hero from "./sections/Hero";
 
 const App = () => {
   return (
     <main className="relative">
-      Nav
+      <Navbar></Navbar>
       <section className="xl:padding-1 wide:padding-r padding-b">
         <Hero></Hero>
       </section>
