@@ -1,8 +1,14 @@
 import { headerLogo } from "../assets/images";
 import { hamburger } from "../assets/icons";
 import { navLinks } from "../constants";
+import { useState } from "react";
 
 const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
   return (
     <header className="padding-x py-8 absolute z-10 w-full">
       <nav className="flex justify-between items-center max-container">
@@ -22,6 +28,40 @@ const Navbar = () => {
           ))}
         </ul>
 
+        {/* Responsive menu */}
+        <ul
+          className={`${
+            isMenuOpen ? "block" : "hidden"
+          } block lg:hidden absolute top-20 right-0 p-4 bg-white border shadow-lg`}
+        >
+          {navLinks.map((item) => (
+            <li key={item.label}>
+              <a
+                href={item.href}
+                className="font-montserrat leading-normal text-lg text-slate-gray block mb-3"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+          <li>
+            <a
+              href="/"
+              className="font-montserrat leading-normal text-lg text-slate-gray block mb-3"
+            >
+              Sign in
+            </a>
+          </li>
+          <li>
+            <a
+              href="/"
+              className="font-montserrat leading-normal text-lg text-slate-gray block"
+            >
+              Explore now
+            </a>
+          </li>
+        </ul>
+
         <div className="flex gap-2 text-lg leading-normal font-medium font-montserrat max-lg:hidden wide:mr-24">
           <a href="/">Sign in</a>
           <span>/</span>
@@ -29,7 +69,14 @@ const Navbar = () => {
         </div>
 
         <div className="hidden max-lg:block">
-          <img src={hamburger} alt="hamburger" width={25} height={25} />
+          <img
+            src={hamburger}
+            alt="hamburger"
+            width={25}
+            height={25}
+            onClick={toggleMenu}
+            className="cursor-pointer"
+          />
         </div>
       </nav>
     </header>
